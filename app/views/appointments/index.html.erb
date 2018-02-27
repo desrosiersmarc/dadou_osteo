@@ -1,0 +1,16 @@
+<div class="container">
+  <h2>Liste des rdv</h2>
+  <% @appointments.each do |appointment| %>
+    <p>
+      <%= appointment.user.email %>
+    </p>
+    <p>
+      <%= appointment.start_date.strftime("%x") %> |
+      <%= appointment.start_date.strftime("%H:%M")  %> > <%= appointment.end_date.strftime("%H:%M") %>
+    </p>
+    <p>
+      <%= appointment.review %> | <%= appointment.rate %>
+    </p>
+    <hr>
+  <% end %>
+</div>
