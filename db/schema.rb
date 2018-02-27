@@ -10,10 +10,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180217121009) do
+ActiveRecord::Schema.define(version: 20180227061759) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "appointment_types", force: :cascade do |t|
+    t.string "name"
+    t.time "duration"
+    t.float "price"
+    t.boolean "bookable"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "appointments", force: :cascade do |t|
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.string "review"
+    t.integer "rate"
+    t.bigint "user_id"
+    t.bigint "appointment_type_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["appointment_type_id"], name: "index_appointments_on_appointment_type_id"
+    t.index ["user_id"], name: "index_appointments_on_user_id"
+  end
+
+  create_table "status_histories", force: :cascade do |t|
+    t.datetime "date"
+    t.bigint "status_type_id"
+    t.bigint "appointment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["appointment_id"], name: "index_status_histories_on_appointment_id"
+    t.index ["status_type_id"], name: "index_status_histories_on_status_type_id"
+  end
+
+  create_table "status_types", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -32,4 +70,8 @@ ActiveRecord::Schema.define(version: 20180217121009) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "appointments", "appointment_types"
+  add_foreign_key "appointments", "users"
+  add_foreign_key "status_histories", "appointments"
+  add_foreign_key "status_histories", "status_types"
 end

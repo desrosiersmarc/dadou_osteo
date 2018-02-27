@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  start_date: 2018-02-17 13:14:52
+  end_date: 2018-02-17 13:14:52
+  review: MyString
+  rate: 1
+  user: one
+  appointment_type: one
+
+two:
+  start_date: 2018-02-17 13:14:52
+  end_date: 2018-02-17 13:14:52
+  review: MyString
+  rate: 1
+  user: two
+  appointment_type: two
