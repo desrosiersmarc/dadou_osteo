@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  duration: 2018-02-17 13:14:30
+  price: 1.5
+  bookable: false
+
+two:
+  name: MyString
+  duration: 2018-02-17 13:14:30
+  price: 1.5
+  bookable: false
