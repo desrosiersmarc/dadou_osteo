@@ -46,10 +46,10 @@ User.create(email:'mdesrosiers@univers.com', password: '123soleil')
 puts " [x]"
 
 print "Create appointments "
-10.times do
+20.times do
   Appointment.create( user: User.all.sample,
                       appointment_type: AppointmentType.all.sample,
-                      start_date: "22/08/2018 11:00:00",
+                      start_date: (Time.now+rand(10).day),
                       end_date: "22/08/2018 12:00:00",
                       review: "Top moumoutte",
                       rate: 4)
