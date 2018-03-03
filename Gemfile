@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 ruby '2.5.0'
 
 gem 'devise'
+gem 'devise-i18n'
 gem 'figaro'
 gem 'jbuilder', '~> 2.0'
 gem 'pg', '~> 0.21'
@@ -22,6 +23,9 @@ group :development do
 end
 
 group :development, :test do
+  gem 'binding_of_caller'
+  gem 'better_errors'
+
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'listen', '~> 3.0.5'
