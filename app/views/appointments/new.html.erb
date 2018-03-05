@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="row">
+    <h1>Prendre un rdv</h1>
+    <%= simple_form_for(@appointment) do |f| %>
+      <%= f.input :appointment_type_id, label: 'Type de rdv :', collection: @appointment_types %>
+      <%= f.input :start_date, label: 'Date et heure du rdv :' %>
+      <%= f.input :user_id, as: :hidden,  input_html: { value: @user.id} %>
+      <%= f.submit 'Valider', class: 'btn btn-danger btn-block' %>
+    <% end %>
+  </div>
+</div>
