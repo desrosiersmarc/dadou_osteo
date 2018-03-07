@@ -15,10 +15,16 @@ class AppointmentsController < ApplicationController
   def create
     @appointment = Appointment.new(appointment_params)
     if @appointment.save
+      @appointment.end_date = @appointment.start_date+1.hours
+      @appointment.save
       redirect_to root_path, notice: "Votre rdv a bien été pris en compte"
     else
       render :new
     end
+  end
+
+  def my_appointments
+    @appointments = Appointment.all.where("user_id = ?", current_user.id)
   end
 
 private
@@ -31,5 +37,4 @@ private
         :user_id,
         :appointment_type_id)
   end
-
 end
