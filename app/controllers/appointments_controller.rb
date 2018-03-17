@@ -1,5 +1,7 @@
 class AppointmentsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
+  before_action :find_user, only: [:new, :create]
+  before_action :list_appointment_types, only: [:new, :create]
 
   def index
     @dates = Appointment.all.map{ |appointment| appointment.start_date.strftime("%F")}.uniq.sort
@@ -8,8 +10,6 @@ class AppointmentsController < ApplicationController
 
   def new
     @appointment = Appointment.new
-    @appointment_types = AppointmentType.all.where(bookable: true)
-    @user = current_user
   end
 
   def create
@@ -24,7 +24,7 @@ class AppointmentsController < ApplicationController
   end
 
   def my_appointments
-    @appointments = Appointment.all.where("user_id = ?", current_user.id)
+    @appointments = Appointment.all.where("user_id = ?", current_user.id).order(:start_date)
   end
 
 private
@@ -37,4 +37,13 @@ private
         :user_id,
         :appointment_type_id)
   end
+
+  def find_user
+    @user = current_user
+  end
+
+  def list_appointment_types
+    @appointment_types = AppointmentType.all.where(bookable: true)
+  end
+
 end
